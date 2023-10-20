@@ -2,12 +2,14 @@
 
 Repositorio para o trabalho da c2 de banco de Dados Ministrada Pelo Professor Howard Cruz 
 
-## Tema - Campeonato de Futebol
+## Tema - Campeonato de Futebol :soccer:
 
-Nosso sistema gerencia um campeonato de futebol ficticio 
+Este projeto é um sistema de gerenciamento de partidas de futebol desenvolvido em Python e SQL, criado como parte de um trabalho acadêmico da matéria de Banco de dados do professor Howard Cruz. Ele oferece uma solução  para controlar jogadores, times e resultados de partidas. Com este sistema, você pode cadastrar,cadastrar, visualizar e analisar informações sobre times, jogadores e partidas 
+
+Com os dados fornecidos rodada a rodada todos os dados são convertidos em uma tabela com a classificação do campeonato e outros dados, gerando 
 
 
-## Como Rodar a aplicação
+## Como Rodar a aplicação :hammer:
 
 Esse sistema de Gerenciar campeonato de futebo é composto por um conjunto de tabelas que representam um campeonato no modelo de pontos corridos, contendo tabelas como: Jogadores, Times, Partidas.
 
@@ -26,7 +28,7 @@ Para que possa testar as conexões com o banco de dados Oracle e o módulo Conex
 ~$ python test.py
 ```
 
-## Organização
+## Organização 📁 
 - [diagrams](diagrams): Nesse diretório está o [diagrama relacional](diagrams/DIAGRAMA_RELACIONAL_PEDIDOS.pdf) (lógico) do sistema.
     * O sistema possui cinco entidades: PRODUTOS, CLIENTES, FORNECEDORES, PEDIDOS e ITENS_PEDIDO
 - [sql](sql): Nesse diretório estão os scripts para criação das tabelas e inserção de dados fictícios para testes do sistema
@@ -39,46 +41,30 @@ Para que possa testar as conexões com o banco de dados Oracle e o módulo Conex
       - Exemplo de utilização para consultas simples:
 
         ```python
-        def listar_clientes(self, oracle:OracleQueries, need_connect:bool=False):
-            query = """
-                    select c.cpf
-                        , c.nome 
-                    from clientes c
-                    order by c.nome
-                    """
-            if need_connect:
-                oracle.connect()
-            print(oracle.sqlToDataFrame(query))
+        def listar_Times(self, oracle:OracleQueries, need_connect:bool=False):
+        query = """
+                select t.times
+                , t.id_time
+                , t.nome
+                from times t
+                order by t.id_time
+                """
+        if need_connect:
+            oracle.connect()
+        print(oracle.sqlToDataFrame(query))
+
         ```
       - Exemplo de utilização para alteração de registros
 
         ```python
         from conexion.oracle_queries import OracleQueries
-        def inserir_cliente(self) -> Cliente:
+        def inserir_Times(self) -> Time:
             # Cria uma nova conexão com o banco que permite alteração
             oracle = OracleQueries(can_write=True)
             oracle.connect()
 
-            # Solicita ao usuario o novo CPF
-            cpf = input("CPF (Novo): ")
-
-            if self.verifica_existencia_cliente(oracle, cpf):
-                # Solicita ao usuario o novo nome
-                nome = input("Nome (Novo): ")
-                # Insere e persiste o novo cliente
-                oracle.write(f"insert into clientes values ('{cpf}', '{nome}')")
-                # Recupera os dados do novo cliente criado transformando em um DataFrame
-                df_cliente = oracle.sqlToDataFrame(f"select cpf, nome from clientes where cpf = '{cpf}'")
-                # Cria um novo objeto Cliente
-                novo_cliente = Cliente(df_cliente.cpf.values[0], df_cliente.nome.values[0])
-                # Exibe os atributos do novo cliente
-                print(novo_cliente.to_string())
-                # Retorna o objeto novo_cliente para utilização posterior, caso necessário
-                return novo_cliente
-            else:
-                print(f"O CPF {cpf} já está cadastrado.")
-                return None
-        ```
+           
+         
       - Outros exemplos: [test.py](src/test.py)
       - Caso esteja utilizando na máquina virtual antiga, você precisará alterar o método connect de:
           ```python
@@ -134,14 +120,12 @@ Para que possa testar as conexões com o banco de dados Oracle e o módulo Conex
   ```
 
 
-
-
 ## Integrantes
--João Victor Leoni dos santos
--Lucas Fraga de Andrade
--Daniel José Holz 
--Gabriel dos Santos
--Jhean Virginio Perim Pazetto
--Guilherme Barbosa Medici Loureiro 
--Maria Eduarda André Carlete 
+*João Victor Leoni dos santos
+*Lucas Fraga de Andrade
+*Daniel José Holz 
+*Gabriel dos Santos
+*Jhean Virginio Perim Pazetto
+*Guilherme Barbosa Medici Loureiro 
+*Maria Eduarda André Carlete 
 
