@@ -155,11 +155,10 @@ Para que possa testar as conexões com o banco de dados Oracle e o módulo Conex
 
 
 ## Integrantes
-*João Victor Leoni dos santos
-*Lucas Fraga de Andrade
-*Daniel José Holz 
-*Gabriel dos Santos
-*Jhean Virginio Perim Pazetto
-*Guilherme Barbosa Medici Loureiro 
-*Maria Eduarda André Carlete 
-
+* João Victor Leoni dos santos
+* Lucas Fraga de Andrade
+* Daniel José Holz 
+* Gabriel dos Santos
+* Jhean Virginio Perim Pazetto
+* Guilherme Barbosa Medici Loureiro 
+* Maria Eduarda André Carlete 
