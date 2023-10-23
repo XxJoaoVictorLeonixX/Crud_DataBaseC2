@@ -6,7 +6,7 @@ Repositorio para o trabalho da c2 de banco de Dados Ministrada Pelo Professor Ho
 
 Este projeto é um sistema de gerenciamento de partidas de futebol desenvolvido em Python e SQL, criado como parte de um trabalho acadêmico da matéria de Banco de dados do professor Howard Cruz. Ele oferece uma solução  para controlar jogadores, times e resultados de partidas. Com este sistema, você pode cadastrar,cadastrar, visualizar e analisar informações sobre times, jogadores e partidas 
 
-Com os dados fornecidos rodada a rodada todos os dados são convertidos em uma tabela com a classificação do campeonato e outros dados, gerando 
+Com os dados fornecidos rodada a rodada todos os dados são convertidos em uma tabela com a classificação do campeonato e outros dados, gerando assim uma classificação na junção de todas as tabelas e é revelado quem foi o campeão e a classificação geral.
 
 
 ## Como Rodar a aplicação :hammer:
@@ -55,6 +55,40 @@ Para que possa testar as conexões com o banco de dados Oracle e o módulo Conex
 
         ```
       - Exemplo de utilização para alteração de registros
+     
+      - def excluir_times(self):
+        oracle = OracleQueries(can_write=True)
+        oracle.connect()
+
+        id_time = int(input("Id do time que deseja Excluir: "))        
+
+        if not self.verifica_existencia_time(oracle, id_time):            
+            df_time = oracle.sqlToDataFrame(f"select id_time, nome from times where id_time = {id_time}")
+            oracle.write(f"delete from times where id_time = {id_time}")            
+            time_excluido = Times(df_time.id_time.values[0], df_time.nome.values[0])
+            print("Time Removido com Sucesso!")
+            print(time_excluido.to_string())
+        else:
+            print(f"O Id:{id_time} do time não existe.")
+
+     
+    def inserir_times(self) -> Times:
+        ''' Ref.: https://cx-oracle.readthedocs.io/en/latest/user_guide/plsql_execution.html#anonymous-pl-sql-blocks'''
+        
+     
+        -id_time = input("Id Time (novo): ")
+
+        if self.verifica_existencia_times(oracle, id_time):
+            nome_time = input("Nome do time (Novo): ")
+            oracle.write(f"insert into times values ('{id_time}', '{nome_time}'")
+            df_times = oracle.sqlToDataFrame(f"select id_time, nome from times where id_time = '{id_time}'")
+            novoTime = Times(df_times.id_time.values[0], df_times.nome.values[0])
+            print(novoTime.to_string())
+            return novoTime
+        else:
+            print(f"O time {id_time} já está cadastrado.")
+            return None
+  
 
         ```python
         from conexion.oracle_queries import OracleQueries
